@@ -12,13 +12,13 @@ package Project;
  */
 public class Client {
     
-    String mac;
-    String fseen;
-    String lseen;
-    int Power;
-    int numofpackets;
-    String bssid;
-    String [] prob_essid;
+    String mac;//MAC address of the client
+    String fseen;// first time seen
+    String lseen;//last time seen
+    int Power;//Signal level reported by the card as the signal gets higher you get closer tothe AP
+    int numofpackets;//The number of data packets sent by the client
+    String bssid;//MAC address of the access point
+    String [] prob_essid;//The ESSIDs probed by the client. These are the networks the client is trying to connect to if it is not currently connected.
      
     public Client(String m, String fs,String ls, int p, int n, String b, String [] pb ){
         this.mac = m;
@@ -40,9 +40,9 @@ public class Client {
        this.prob_essid = p.prob_essid.clone();
    }
     
+    @Override
     public String toString() {
         return "MAC.:" + this.mac + ",, "
-                + "Date.:" + this.fseen+"-"+this.lseen+",, Power.:"
-                + this.Power + ",, Number of packets.:" + this.numofpackets+",, BSSID.:" + this.bssid;
+                + "Date.:" + this.fseen+"-"+this.lseen+ ",, Number of packets.:" + this.numofpackets+",, BSSID.:" + this.bssid;
     }
 }
