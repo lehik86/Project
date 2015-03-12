@@ -85,16 +85,19 @@ public class Project extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStartActionPerformed
-        ArrayList <Client> Cl1=new ArrayList<Client>(readExcell(""));
-        ArrayList <Client> Cl2=new ArrayList<Client>(readExcell(""));
-        ArrayList <Client> Cl0=new ArrayList<Client>();
-        for(int i=0;i<Cl1.size();i++){
-              for(int j=0;j<Cl2.size();j++){
-            if(Cl2.get(j).mac==Cl1.get(i).mac){
-                Cl0.add(Cl2.remove(j));
-                Cl0.add(Cl2.get(i));
-            }
+        ArrayList <Client> Cl1=new ArrayList<>(readExcell(""));
+        ArrayList <Client> Cl2=new ArrayList<>(readExcell("1"));
+        ArrayList <Client> Cl0=new ArrayList<>();
+        for (Client Cl11 : Cl1) {
+            for (int j = 0; j<Cl2.size(); j++) {
+                if (Cl2.get(j).mac.equalsIgnoreCase(Cl11.mac)) {
+                    Cl0.add(Cl2.remove(j));
+                    // Cl0.add(Cl1.get(i));
                 }
+            }
+        }
+        for (Client Cl01 : Cl0) {
+            readText.setText(readText.getText()+"\n" + Cl01.mac);
         }
     }//GEN-LAST:event_bStartActionPerformed
    ArrayList<Client> readExcell(String num){
