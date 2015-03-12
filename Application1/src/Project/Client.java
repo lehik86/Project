@@ -18,16 +18,16 @@ public class Client {
     int Power;//Signal level reported by the card as the signal gets higher you get closer tothe AP
     int numofpackets;//The number of data packets sent by the client
     String bssid;//MAC address of the access point
-    String [] prob_essid;//The ESSIDs probed by the client. These are the networks the client is trying to connect to if it is not currently connected.
+  //  String prob_essid;//The ESSIDs probed by the client. These are the networks the client is trying to connect to if it is not currently connected.
      
-    public Client(String m, String fs,String ls, int p, int n, String b, String [] pb ){
+    public Client(String m, String fs,String ls, int p, int n, String b ){
         this.mac = m;
         this.fseen = fs;
         this.lseen = ls;
         this.Power = p;
         this.numofpackets = n;
         this.bssid = b;
-        this.prob_essid = pb.clone();
+      //  this.prob_essid = pb;
     }
     
    public Client(Client p){
@@ -37,7 +37,7 @@ public class Client {
        this.Power = p.Power;
        this.numofpackets = p.numofpackets;
        this.bssid = p.bssid;
-       this.prob_essid = p.prob_essid.clone();
+      // this.prob_essid = p.prob_essid;
    }
     
     @Override

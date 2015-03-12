@@ -61,7 +61,7 @@ public class AccessPoint {
         this.id_lenght = p.id_lenght;
         this.essid = p.essid;
    }
-    
+
     @Override
     public String toString() {
         return "BSSID.:" + this.bssid + ",, "
