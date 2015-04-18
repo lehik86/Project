@@ -1,0 +1,13 @@
+26	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+24	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+747	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+102	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+24	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+24	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+90	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+545	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+357	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+116	c4:04:15:19:66:bc	f4:f1:5a:de:eb:ee				
+90	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+90	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				
+90	f4:f1:5a:de:eb:ee	c4:04:15:19:66:bc				

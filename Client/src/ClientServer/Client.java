@@ -50,7 +50,7 @@ public class Client {
     }
 
     try {
-        File inputFile = new File("‪C:\\Users\\alexey\\Documents\\NetBeansProjects\\Application2\\test1.txt");
+        File inputFile = new File("‪test1.txt");
         fos = new FileOutputStream(inputFile);
         bos = new BufferedOutputStream(fos);
 

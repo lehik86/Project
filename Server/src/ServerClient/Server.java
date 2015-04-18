@@ -25,7 +25,7 @@ public class Server {
 
     socket = new Socket(host, 4444);
 
-    File file = new File("‪C:\\Users\\alexey\\Documents\\NetBeansProjects\\JavaApplication3\\test0.txt");
+    File file = new File("‪test0.txt");
     // Get the size of the file
     long length = file.length();
     if (length > Integer.MAX_VALUE) {
