@@ -6,6 +6,16 @@
 package test;
 
 import java.util.ArrayList;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -43,6 +53,7 @@ public class Project extends javax.swing.JFrame {
         readText = new javax.swing.JTextArea();
         bCheckNeighbors = new javax.swing.JButton();
         Lentermac = new javax.swing.JLabel();
+        get_files = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +94,13 @@ public class Project extends javax.swing.JFrame {
 
         Lentermac.setText("         Enter MAC address");
 
+        get_files.setText("Get Files");
+        get_files.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                get_filesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,13 +110,17 @@ public class Project extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bCheckNeighbors, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(bFindMac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bClients, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(Lentermac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txMac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(Lentermac, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bClients, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bCheckNeighbors, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bFindMac, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txMac, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(get_files, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,6 +132,8 @@ public class Project extends javax.swing.JFrame {
                         .addComponent(Lentermac, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txMac, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(get_files)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bFindMac, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,7 +141,7 @@ public class Project extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bCheckNeighbors)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -217,6 +241,125 @@ public class Project extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bCheckNeighborsActionPerformed
 
+    private void get_filesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get_filesActionPerformed
+        try {                                          
+            // TODO add your handling code here:
+            InputStream is = null;
+            FileOutputStream fos = null;
+            BufferedOutputStream bos = null;
+            int bufferSize = 0;
+            
+            
+            Socket socket = null;
+            String host = "127.0.0.1";
+            
+            try {
+                socket = new Socket(host, 5555);
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            try {
+                is = socket.getInputStream();
+                
+                bufferSize = socket.getReceiveBufferSize();
+                System.out.println("Buffer size: " + bufferSize);
+            } catch (IOException ex) {
+                System.out.println("Can't get socket input stream. ");
+            }
+            
+            try {
+                File inputFile = new File("/home/lehik/Desktop/Project-2015-04-17/Project/myfile2.csv");
+                fos = new FileOutputStream(inputFile);
+                bos = new BufferedOutputStream(fos);
+                
+            } catch (FileNotFoundException ex) {
+                System.out.println("File not found. ");
+            }
+            
+            byte[] bytes = new byte[bufferSize];
+            
+            int count;
+            
+            try {
+                while ((count = is.read(bytes)) > 0) {
+                    bos.write(bytes, 0, count);
+                }   } catch (IOException ex) {
+                    Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            System.out.println("File is upload");
+            
+            try {
+                bos.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                bos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                is.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                socket.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            try {
+                socket = new Socket(host, 6666);
+            } catch (IOException ex) {
+                Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                is = socket.getInputStream();
+                
+                bufferSize = socket.getReceiveBufferSize();
+                System.out.println("Buffer size: " + bufferSize);
+            } catch (IOException ex) {
+                System.out.println("Can't get socket input stream. ");
+            }
+            
+            try {
+                File inputFile = new File("/home/lehik/Desktop/Project-2015-04-17/Project/myfile2.cap");
+                fos = new FileOutputStream(inputFile);
+                bos = new BufferedOutputStream(fos);
+                
+            } catch (FileNotFoundException ex) {
+                System.out.println("File not found. ");
+            }
+            
+            byte[] bytes1 = new byte[bufferSize];
+            
+            int count1;
+            
+            while ((count1 = is.read(bytes1)) > 0) {
+                bos.write(bytes1, 0, count1);
+            }
+            System.out.println("File is upload");
+            
+            bos.flush();
+            bos.close();
+            is.close();
+            socket.close();
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+       
+    }//GEN-LAST:event_get_filesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,6 +394,7 @@ public class Project extends javax.swing.JFrame {
     private javax.swing.JButton bCheckNeighbors;
     private javax.swing.JButton bClients;
     private javax.swing.JButton bFindMac;
+    private javax.swing.JButton get_files;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
